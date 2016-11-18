@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+	
+	# Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+	
+	RewriteCond %{HTTP_HOST} ^tigaraksa-ep.co.id [NC,OR]
+	RewriteCond %{HTTP_HOST} ^www.tigaraksa-ep.co.id [NC,OR]
+	RewriteCond %{HTTP_HOST} ^tigaraksa-ep.com [NC,OR]
+	RewriteCond %{HTTP_HOST} ^www.tigaraksa-ep.com [NC,OR]
+	RewriteCond %{HTTP_HOST} ^tigaraksa-educationalproducts.com [NC,OR]
+	RewriteCond %{HTTP_HOST} ^www.tigaraksa-educationalproducts.com [NC]
+		
+	RewriteRule ^(.*)$ http://www.tigaraksa-ep.id/ [L,R=301,NC]
+	
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+	
+</IfModule>

@@ -1,0 +1,48 @@
+.content_std .wrapper .inner_content .list_awards img {
+    margin: 0 0 20px;
+    max-width: 200%;
+    min-height: 100%;
+}
+
+.change_pswd {
+    border: 1px solid #d8d8d8;
+    color: #666;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 3px;
+}
+.testimonial
+a.readmore {
+    margin-top: 5px !important;
+}
+.content_std .list_product .box .image {
+    float: left;
+    height: 220px;
+    position: relative;
+    text-align: center;
+    width: 250px !important;
+}
+
+.contact_btn {
+    padding: 0 20px 0 20px !important;
+    min-width: 70px !important;
+}
+#productList .col_account {
+    margin-left: 15px !important;
+}
+
+.tree li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 5px 0px !important;
+    position: relative;
+}
+
+.content_std .wrapper .my_account li .text_tree{
+    font-size: 11px;
+}
+.tree ul li span.boxImage {
+    float: left;
+    width: 40px !important;
+}

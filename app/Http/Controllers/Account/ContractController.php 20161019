@@ -1,0 +1,374 @@
+<?php
+
+namespace App\Http\Controllers\Account;
+
+use App\Http\Controllers\Controller;
+use App\Models\Account\KpHeader;
+use App\Models\Account\SlipCommission;
+use App\Models\Branch;
+use App\Models\Contract;
+use App\Models\Contract\Child;
+use App\Models\Contract\GroupProduct;
+use App\Models\Contract\OwnedProduct;
+use App\Models\Contract\Product as ContractProduct;
+use App\Models\Product;
+use App\Models\Product\Discount as ProductDiscount;
+use App\Models\Product\GroupPricelist;
+use App\Models\Product\Pricelist;
+use App\Models\Product\Category;
+use App\Models\RangeDiscount;
+use App\Models\Source;
+use App\Models\Branch\Coverage;
+use App\Site;
+use App\User;
+use Auth;
+use Carbon;
+use App\Models\Subdistrict;
+use Illuminate\Http\Request;
+use \Webarq\Site\Models\Setting;
+
+class ContractController extends Controller {
+
+	public function getIndex(Contract $contract, Request $request) {
+		$rows = $contract->where('user_id', Auth::user()->epc->id);
+		($request->start_date == null) ?: $rows->where('created_at', '>=', Carbon::parse($request->start_date)->format('Y-m-d h-i-s'));
+		($request->end_date == null) ?: $rows->where('created_at', '<=', Carbon::parse($request->end_date)->format('Y-m-d h-i-s'));
+		($request->status == null) ?: $rows->where('status', $request->status);
+		$rows = $rows->paginate(10);
+		return view('account.list', compact('rows'));
+	}
+
+	public function getInvoice(Contract $contract, $id) {
+		$row = $contract->find($id);
+		$products = ContractProduct::where('contract_id', $id)->get();
+		$productGroups = (GroupProduct::where('contract_id', $id)->first()) ? GroupProduct::where('contract_id', $id)->first()
+			->groupPricelist()
+			->groupBy('product_code')
+			->get() : [];
+		$children = Child::where('contract_id', $id)->get();
+		$ownedProducts = OwnedProduct::where('contract_id', $id)->get();
+
+		return \PDF::loadView('account.invoice', compact('row', 'products', 'children', 'ownedProducts', 'productGroups'))->download('kontrak-pembelian_' . $row->contract_number . '' . '_' . date('d-m-Y') . '.pdf');
+	}
+	public function getPageOne(Contract $contract, $id = null) {
+		$contract = ($id) ? $contract->find($id) : [];
+		$branches = Branch::lists('name', 'code');
+		if(!$id){
+			$contractModel = new Contract;
+			$contractModel->user_id = Auth::user()->id;
+			$contractModel->contract_number = \App\Site::contractNumber();
+			$contractModel->save();
+		}
+		$contractNumber =  ($id) ? $contract->contract_number : $contractModel->contract_number;
+
+		return view('account.contract.page-one', compact('contract', 'branches', 'contractNumber'));
+	}
+
+	public function postPageOne(Request $request) {
+		$this->validate($request, [
+			'gender' => 'required',
+			'office' => 'required',
+			'name' => 'required',
+			'office_address' => 'required',
+		]
+		);
+		$model = Contract::where('contract_number', $request->contract_number)->first();
+		$model->user_id = Auth::user()->epc->id;
+		$model->branch_id = Branch::where('code', $request->branch_code)->first()->id;
+		$model->contract_number = $request->contract_number;
+		$model->name = $request->name;
+		$model->gender = $request->gender;
+		$model->office = $request->office;
+		$model->office_address = $request->office_address;
+		$model->floor = $request->floor;
+		$model->position = $request->position;
+		$model->payment_type = $request->payment_type;
+		$model->office_telephone = $request->office_telephone;
+		$model->email = $request->email;
+		$model->home_address = $request->home_address;
+		$model->home_telephone = $request->home_telephone;
+		$model->postal_code = $request->postal_code1 . $request->postal_code2 . $request->postal_code3 . $request->postal_code4 . $request->postal_code5;
+		$model->shipping_address = $request->shipping_address;
+		$model->receivable_address = $request->receivable_address;
+		$model->mobile_phone = $request->mobile_phone;
+		if ($request->hasFile('id_card')) {
+			$fileName = 'ktp_'.$model->contract_number . '_' . date('dmYhis') . '.' . $request->file('id_card')->getClientOriginalExtension();
+			$request->file('id_card')->move(public_path('contents'), $fileName);
+			$model->id_card = $fileName;
+		}
+		if ($request->hasFile('file_transfer')) {
+			$fileName = 'file_transfer_'.$model->contract_number . '_' . date('dmYhis') . '.' . $request->file('file_transfer')->getClientOriginalExtension();
+			$request->file('file_transfer')->move(public_path('contents'), $fileName);
+			$model->file_transfer = $fileName;
+		}
+		$model->save();
+
+		return redirect('my-account/contracts/page-two/' . $model->id);
+	}
+
+	public function getPageTwo($id, Request $request) {
+		$contract = Contract::find($id);
+		$categories = Category::lists('name', 'id')->all();
+		$categoryId = ($contract->product()->first()) ? $contract->product()->first()->product->category_id : 1;
+
+		$productCodes = ($request->category_id) ? Product::where('category_id', $request->category_id)->lists('code') : Product::where('category_id', $categoryId)->lists('code');
+
+		$firstPricelist = (Pricelist::whereIn('product_code', $productCodes)->first()) ? Pricelist::whereIn('product_code', $productCodes)->first()->code : '';
+
+		$pricelists = ($request->pricelist_code && $request->group_pricelist == 'standar') ? Pricelist::where('code', $request->pricelist_code) : (($contract->product()->first()) ? Pricelist::where('code', $contract->product()->first()->pricelist_code) : Pricelist::where('code', $firstPricelist));
+		\App\Site::filterByTypeCredit($contract->payment_type, $pricelists);
+
+		$installments = ($request->pricelist_code && $request->group_pricelist == 'standar') ? Pricelist::where('code', $request->pricelist_code) : Pricelist::groupBy('code');
+		\App\Site::filterByTypeCredit($contract->payment_type, $installments);
+
+		$installments = ($request->group_pricelist != 'group') ? $installments->lists('installment_number', 'installment_number') :
+		(GroupPricelist::groupBy('credit_installment_number')->where('pricelist_code', $request->pricelist_code)->lists('credit_installment_number', 'credit_installment_number'));
+		$firstInstallment = ($request->installment_number) ?: collect($installments)->first();
+
+		$groupProductPricelists = ($request->installment_number) ? GroupPricelist::where('credit_installment_number', $request->installment_number) : new GroupPricelist;
+		$groupProductPricelists = ($request->pricelist_code) ? $groupProductPricelists->where('pricelist_code', $request->pricelist_code) : $groupProductPricelists;
+
+		$groupProductPricelists = $groupProductPricelists->whereIn('product_code', $productCodes);
+
+		$pricelist = $pricelists->whereIn('product_code', $productCodes);
+
+		$productPricelists = $pricelists->where('installment_number', $firstInstallment)->groupBy('product_code')->get();
+		$productIds = ($productPricelists) ? $productPricelists->lists('product_code') : 0;
+
+		$installmentNumber = ($request->installment_number) ? $request->installment_number : (($contract->product()->first()) ? $contract->product()->first()->installment_number : $firstInstallment);
+		$pricelists = ($request->category_id) ? Pricelist::whereIn('product_code', $productCodes)->lists('desc', 'code') : Pricelist::lists('desc', 'code');
+
+		$pricelistCode = ($contract->product()->first()) ? $contract->product()->first()->pricelist_code : $firstPricelist;
+		$request->group_pricelist = ($request->group_pricelist) ?: $pricelistCode;
+
+		$discounts = new ProductDiscount;
+		$rangeDiscounts = new RangeDiscount;
+		$discounts = ($request->group_pricelist == 'group' && $request->discount_code) ? $discounts->whereIn('product_code', $productIds)->lists('discount_desc', 'code')->toArray() : $discounts->groupBy('code')->lists('discount_desc', 'code')->toArray();
+		$discounts = ($request->group_pricelist == 'standar') ? $discounts + $rangeDiscounts->lists('discount_desc', 'code')->toArray() : $rangeDiscounts->lists('discount_desc', 'code')->toArray();
+		$discountCode = ($request->discount_code) ? $request->discount_code : (($contract->product()->first()) ? $contract->product()->first()->discount_code : null);
+
+
+		$savedGroup = (GroupProduct::where('contract_id', $contract->id)->first()) ? 'group' : 'standar';
+		$termAndCond = Setting::ofCodeType('term-n-cond1', 'kp-template')->value;
+
+		return view('account.contract.page-two', compact('contract', 'productPricelists', 'groupProductPricelists', 'pricelists', 'discounts', 'categories', 'installments', 'pricelistCode', 'installmentNumber', 'discountCode', 'groupPricelistCode', 'savedGroup', 'termAndCond', 'categoryId'));
+	}
+
+	public function getAjaxProductPricelists(Request $request) {
+		if ($request->desc) {
+			$productPricelists = Pricelist::where('desc', $request->desc)->groupBy('product_id')->lists('product_id');
+			$products = $products->whereIn('id', $productIds)->get();
+		} else {
+			$products = $products->get();
+		}
+
+		$pricelistId = "";
+
+		return response()->json(['html' => view('partial.product_list', compact('productPricelists'))->render()]);
+	}
+
+	public function getAjaxInstallmentPrice($pricelistId) {
+		$priceList = Pricelist::find($pricelistId);
+
+		return response()->json(['total_price' => \App\Site::money($priceList->total_price)]);
+	}
+
+	public function postPageTwo(Request $request) {
+
+		$model = Contract::find($request->id);
+		$model->total_investment = $request->total_investment;
+		$model->initial_investment = $request->initial_investment;
+		$model->residual_investment = $request->residual_investment;
+		$model->month_investment = $request->month_investment;
+		$model->credit_total_month = $request->credit_total_month;
+		$model->save();
+
+		if ($contractProduct = ContractProduct::where('contract_id', $model->id)->first()) {
+			$contractProduct->where('contract_id', $model->id)->delete();
+		}
+
+		for ($i = 0; $i < count($request->product_id); $i++) {
+			$product = new ContractProduct;
+			$product->contract_id = $model->id;
+			$product->product_id = $request->product_id[$i];
+			$product->total_price = $request->total_price[$i];
+			$product->quantity = $request->quantity[$i];
+			$product->discount_code = $request->discount_code[$i];
+			$product->discount_value = ($discount = \App\Site::discount($request->product_id[$i],$request->discount_code[$i])) ? $discount->discount : 0;
+			$product->installment_number = $request->installment_number;
+			$product->pricelist_code = $request->pricelist_code;
+			$product->save();
+		}
+
+		if ($contractGroupProduct = GroupProduct::where('contract_id', $model->id)->first()) {
+			$contractGroupProduct->where('contract_id', $model->id)->delete();
+		}
+
+		if (count($request->group_pricelist_code) != 0) {
+			for ($i = 0; $i < count($request->group_pricelist_code); $i++) {
+				$groupProduct = new GroupProduct;
+				$groupProduct->contract_id = $model->id;
+				$groupProduct->group_pricelist_code = $request->group_pricelist_code[$i];
+				$groupProduct->installment_number = $request->installment_number;
+				$groupProduct->save();
+			}
+		}
+
+		return redirect('my-account/contracts/page-three/' . $model->id);
+	}
+
+	public function getPageThree($id) {
+		$contract = Contract::find($id);
+		$products = Product::lists('name', 'id');
+		$children = (Child::where('contract_id', $contract->id)->get()) ?: [];
+		$productSeries = OwnedProduct::where('contract_id', $id)->get();
+		$sources = Source::lists('name', 'id');
+
+		return view('account.contract.page-three', compact('contract', 'products', 'children', 'productSeries', 'sources'));
+	}
+
+	public function postPageThree(Request $request) {
+		$model = Contract::find($request->id);
+		$model->couple_name = $request->couple_name;
+		$model->couple_position = $request->couple_position;
+		$model->couple_telephone = $request->couple_telephone;
+		$model->couple_office = $request->couple_office;
+		$model->couple_office_address = $request->couple_office_address;
+		$model->relatives_name = $request->relatives_name;
+		$model->relatives_office_address = $request->relatives_office_address;
+		$model->relatives_telephone = $request->relatives_telephone;
+		$model->home_status = $request->home_status;
+		$model->cc_number = $request->cc_number;
+		$model->cc_bank = $request->cc_bank;
+		$model->cc_valid_date = Carbon::parse($request->cc_valid_date)->format('Y-m-d');
+		$model->source_id = $request->source_id;
+
+		$model->save();
+		if ($child = Child::where('contract_id', $model->id)) {
+			$child->delete();
+		}
+
+		for ($i = 0; $i < count($request->child_name); $i++) {
+			$child = new Child;
+			$child->contract_id = $model->id;
+			$child->name = $request->child_name[$i];
+			$child->school = $request->child_school[$i];
+			$child->date_of_birth = \Carbon::parse($request->child_date_of_birth[$i])->format('Y-m-d');
+			$child->save();
+		}
+		if ($ownedProduct = OwnedProduct::where('contract_id', $model->id)) {
+			$ownedProduct->delete();
+		}
+		for ($i = 0; $i < count($request->product_id); $i++) {
+			$ownedProduct = new OwnedProduct;
+			$ownedProduct->contract_id = $model->id;
+			$ownedProduct->product_id = $request->product_id[$i];
+			$ownedProduct->epc_name = $request->epc_name[$i];
+			$ownedProduct->save();
+		}
+
+		return redirect('my-account/contracts/page-four/' . $model->id);
+	}
+
+	public function getPageFour($id) {
+		$contract = Contract::find($id);
+		$termAndCond = Setting::ofCodeType('term-n-cond2', 'kp-template')->value;
+		return view('account.contract.page-four', compact('contract', 'termAndCond'));
+	}
+
+	public function postPageFour(Request $request) {
+		$contract = Contract::find($request->id);
+		$contract->status = 'Completed';
+		$contract->save();
+
+		return redirect('my-account/contracts');
+	}
+
+	public function getTrackingOrder() {
+		return view('account.tracking_order');
+	}
+
+	public function postTrackingOrder(Request $request) {
+
+		$model = new KpHeader;
+		$row = $model->where('skh_so_kp_number', $request->kp_number)->first();
+
+		return redirect()->back()->with('row', $row);
+	}
+
+	public function getTrackingOrderResult() {
+		return view('account.tracking_order_result');
+	}
+
+	public function getDownloadSlip($month) {
+		$slipCommissions = SlipCommission::where('rp_rep_id', Auth::user()->epc->email)->where('rp_period_year', Carbon::now()->format('Y'))->where('rp_period_month', $month);
+		$slipCommissions = $slipCommissions->orderBy('rp_date_paid', 'asc')->get();
+		$slipCommission = $slipCommissions->first();
+
+		return \PDF::loadView('account.slip-commission', compact('slipCommissions', 'slipCommission'))->setOrientation('landscape')->download('slip-commission.pdf');
+	}
+
+	public function getAjaxProductList($categoryId, $paymentType) {
+		$products = (Product::where('category_id', $categoryId)->get()) ?: [];
+		$priceList = ['' => 'Pilih Pricelist'] + Pricelist::productList($products->lists('id'))->lists('code', 'code')->toArray();
+		$pricelistId = "";
+		$pricelistCode = "";
+		if ($paymentType == 'Cash') {
+			return response()->json(['html' => view('partial.product_list', compact('products'))->render()]);
+		} else {
+			return response()->json(['html' => view('partial.product_list_credit', compact('products', 'pricelistId'))->render(), 'pricelist' => view('partial.pricelist', compact('priceList', 'pricelistCode'))->render()]);
+		}
+
+	}
+
+	public function getRelease($id) {
+		Contract::where('id', $id)->update(['status' => 'Released']);
+
+		return redirect()->back()->with('message', 'Data berhasil dikirim!');
+	}
+
+	public function getAjaxChangePassword(Request $request) {
+
+		if ($request->password) {
+			if ($request->password == $request->password_confirmation) {
+				User::where('email', Auth::user()->epc->email)->update(['password' => md5($request->password)]);
+				return response()->json(['message' => 'Ubah password sukses!']);
+			} else {
+				return response()->json(['message' => 'Konfirmasi password salah!']);
+			}
+		}
+	}
+
+	public function getAjaxDeleteContract($id) {
+		ContractProduct::where('contract_id', $id)->delete();
+		OwnedProduct::where('contract_id', $id)->delete();
+		Child::where('contract_id', $id)->delete();
+		Contract::find($id)->delete();
+
+		return redirect()->back()->with('message', 'Kontrak berhasil dihapus!');
+	}
+
+	public function postAjaxBranchSelector(Request $request)
+	{
+		$subdistrict = Subdistrict::where('postal_code', $request->postalCode)->first();
+		if($subdistrict){
+			$coverage = Coverage::where('city_id', $subdistrict->city_id)->first();
+			if($coverage)
+			{
+				$branchCode = $coverage->branch->code;
+			}else{
+				$branchCode = Auth::user()->epc->profile->rm_branch_id;
+			}
+		}else{
+			$branchCode = Auth::user()->epc->profile->rm_branch_id;
+		}
+		$branches = Branch::lists('name', 'code');
+		if($request->paymentType == 'Cash')
+		{
+			$branchCode = Auth::user()->epc->profile->rm_branch_id;
+		}
+
+		return response()->json(['html' => view('account.contract.branch-list', compact('branches', 'branchCode'))->render()]);
+	}
+
+}

@@ -1,0 +1,519 @@
+/*=============================================================================================
+    Company    : PT Web Architect Technology - webarq.com
+    Document   : MediaQuery 480
+    Author     : Rizki Nida Chaerulsyah - akuiki.net
+==============================================================================================*/
+
+/* structure
+----------------------------------------------------------------------------------------------*/
+header .top .wrapper{display: none;}
+header .top-mobile{display:none;}
+.wrapper {width: 460px;}
+/* header
+----------------------------------------------------------------------------------------------*/
+body{overflow-x:hidden; }
+header nav{z-index: 999;position: absolute;width:200px;height:673px;background-color: #ffffff;right:-200px;top:87px;line-height: 10px;}
+header nav a{display:block;width:100%;position: relative;margin-top:10px;text-align: left;padding-top: 20px;border-bottom:1px solid #cecece;height: 38px;}
+header nav a span{position: relative;float:left;top: -22px;margin-left: 10px;margin-right:10px;}
+
+
+/* middle
+----------------------------------------------------------------------------------------------*/
+section.banner p {top: 15px;line-height: 19px;font-size: 15px;}
+
+
+.content.home .wrapper {padding: 50px 0;}
+.content.home .wrapper h2 {font-size: 32px;}
+.content.home .wrapper p {font-size: 18px;line-height: 26px;max-width: 360px}
+
+.content.home .management .left,
+.content.home .management .right{display: block;float: none;margin: auto;text-align: center;}
+.content.home .management .right{margin: 20px auto 0;}
+.content.home .management .right h2{
+    position: absolute;
+    top:50px;
+    left: 0;
+    width: 100%;
+}
+.content.home .management .right p {margin-bottom: 25px;}
+.content.home .management .left{margin-top:55px;}
+
+.content.home .popularseries .slide {height: 450px}
+.content.home .popularseries .slide .left,
+.content.home .popularseries .slide .right{max-width: 340px;float: none;left: 0;right: 0;margin: auto}
+
+.content.home .bx-wrapper .bx-controls-direction a.bx-next {right: -5px;}
+.content.home .bx-wrapper .bx-controls-direction a.bx-prev {left: -5px;}
+
+.content.home .testimonial .wrapper {width: 320px;}
+.content.home .testimonial .box{float: none;margin:0 auto 30px}
+.content.home .testimonial .box:nth-of-type(3),
+.content.home .testimonial .box:nth-of-type(4){margin:0 auto 30px}
+.content.home .testimonial .box:nth-of-type(4){display: block;}
+.content.home .testimonial a.readmore {margin-top: 30px;}
+
+.content.home .events .left {width: 212px;}
+.content.home .events .box{height:300px}
+.content.home .events .left img{height: auto;}
+.content.home .events .right {width: 175px;}
+.content.home .events .box h6{ margin: 15px 0 5px;}
+.content.home .events .bx-wrapper .bx-controls-direction a.bx-next {right: -34px;}
+.content.home .events .bx-wrapper .bx-controls-direction a.bx-prev {left: -34px;}
+
+.content.home .csr {height: auto;}
+.content.home .csr .wrapper{padding-bottom: 330px}
+.content.home .csr .left {width: 400px;margin: auto;float: none;display: block;text-align: center}
+.content.home .csr img.bg{height: auto;}
+.content.home .csr .bx-wrapper{margin: auto}
+
+.content_std .wrapper .inner_content{width: 318px; padding-bottom: 10px;}
+.content_std .wrapper .inner_content h2{font-size: 30px;}
+.content_std .wrapper .inner_content .breadcrumb{margin-bottom: 30px;}
+.content_std .wrapper .inner_content .breadcrumb_articles{margin-bottom: 61px;}
+.content_std .border_breadcrumb_articles{top: 100px;}
+
+.content_std .wrapper .inner_content .breadcrumb_account{margin-bottom: 61px;}
+.content_std .border_breadcrumb_account{top: 80px;}
+
+.content_std .wrapper .inner_content .share{margin-top: 30px;padding: 20px 0 0px 0;}
+.content_std .wrapper .inner_content .wrap_branches #map{width: 278px;height: 252px;}
+
+.content_std .wrapper .inner_content .list_awards{text-align: center;margin:0 auto;width: 200px;}
+.content_std .wrapper .inner_content .list_awards .box{float: left;margin:0 auto;}
+.content_std .wrapper .inner_content .list_awards .box .image{text-align: center}
+.content_std .wrapper .inner_content .image{
+    text-align: center;
+    float: none;
+/*    margin: 0 auto;*/
+}
+.content_std .list_product .box .text,
+.content_std .list_activities .box .text,
+.content_std .list_activities_detail .box .text,
+.content_std .list_articles_detail .box .text,
+.content_std .list_comment .box .text
+{
+	float:left;
+}
+.content_std .list_articles .box .text{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: -39px;
+    width: 280px;
+}
+
+.content_std .inner_content .prod_detail .box .img_prod_pc{display: none;}
+.content_std .bg_prod_detail{height: 2523px;}
+.content_std .bg_prod_detail_contact {
+    top: 2269px;
+}
+.content_std .list_activities_detail .box .image,
+.content_std .list_articles_detail .box .image
+{
+    width: 280px;
+}
+.content_std .wrapper .inner_content .comment .comment_footer{display: none;}
+.content_std .wrapper .inner_content .comment textarea{width: 243px}
+.content_std .wrapper .inner_content .comment .info_login{    top: -149px;}
+.content_std .wrapper .inner_content .comment textarea{
+	    border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.content_std .list_comment{
+	margin-top: -100px;
+}
+.content_std .wrapper .list_comment .image{text-align: left;}
+.content_std .list_comment .box .image{width: 50px;}
+.content_std .list_comment .box .text{float: left;width: 200px;margin-left: 10px;}
+.content_std .list_comment .box p {
+    margin-bottom: 25px;
+    position: relative;
+    margin-top: -5px;
+    margin-left: -10px;
+    width: 275px;
+}
+.content_std .list_comment .box .date {
+    margin-left: 56px;
+    margin-top: -45px;
+    width: 200px;
+    position: absolute;
+}
+.content_std .list_comment .box  .readmore.type_2{
+	 margin-left: 0px;
+}
+.content_std .list_comment .box h5 {
+    font-size: 16px;
+    float: left;
+    margin-left: 56px;
+    margin-top: -73px;
+}
+.content_std .inner_content .prod_detail .box_white p {
+    font-size: 24px;
+    line-height: inherit;
+    width: 238px;
+    margin: 20px 0 185px 25px;
+}
+.content_std .inner_content .prod_detail .box_white img{top:135px;}
+.content_std .wrapper .inner_content .boxPagination{display: block;}
+.content_std .wrapper .inner_content .list_articles {
+    text-align: center;
+    margin: 0 auto;
+    width: 200px;
+}
+.content_std .wrapper .inner_content .list_articles .box {
+    float: left;
+    margin: 0 auto;
+    width: 286px;
+    margin-left: -46px;
+    border-bottom: none;
+    padding: 0 0 20px 0;
+}
+.content_std .wrapper .inner_content .comment_articles,
+.content_std .wrapper .inner_content .list_comment_articles,
+.content_std .wrapper .inner_content .border_comment_articles
+{
+    display: none;
+}
+
+.content_std .wrapper .inner_content .account_form .contact_us{
+    background-color: #eeeeee;
+    border: 1px solid #862121;
+    width: 240px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    -o-border-radius:10px;
+    -ms-border-radius:10px;
+    padding: 20px 0 0 20px;
+}
+.content_std .wrapper .inner_content .box_tb_kontrak{
+    width: 280px;
+    overflow-x: scroll;
+    overflow-y:hidden;
+    padding-bottom: 20px;
+}
+.content_std .wrapper .inner_content .tb_kontrak{
+    width: 670px;
+}
+.content_std .wrapper .inner_content .boxWizard{
+    float: none;
+    margin:20px auto;
+}
+.content_std .wrapper .inner_content .contact_form .row_input .kode_pos input{
+    width: 15px !important;
+}
+.content_std .wrapper .inner_content .contact_form .row_input .col_input .tb_radio input{
+    width: 20px;
+}
+.content_std .wrapper .inner_content .form_account  h2{
+    line-height: 21px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .col_account,
+.content_std .wrapper .inner_content .form_account .row_account .row_account2 .col_account2
+{
+    margin-left: 0px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .col_account:first-child{
+    margin-bottom: 10px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .col_account input, .content_std .wrapper .inner_content .form_account .row_account .col_account select, .content_std .wrapper .inner_content .form_account .row_account .col_account textarea, .content_std .wrapper .inner_content .form_account .row_account .row_account2 .col_account2 input, .content_std .wrapper .inner_content .form_account .row_account .row_account2 .col_account2 select, .content_std .wrapper .inner_content .form_account .row_account .row_account2 .col_account2 textarea{
+    width: 258px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .row_account2 .kode_pos input{
+    width: 18px !important;
+}
+.content_std .wrapper .inner_account{
+        width: 280px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list input[type='checkbox']{
+    width: 20px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_2
+{
+
+    margin-left: 10px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_3{
+    width: 200px;
+    line-height: 21px;
+    margin-left: 31px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_4{
+    margin-left: 31px;
+
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_5{
+    margin-left: 31px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_5,
+.content_std .wrapper .inner_content .form_account .produk_list .col_5 input
+{
+    width: 20px;
+    float: right;
+    text-align: center;
+    margin-top: -13px;
+}
+.content_std .wrapper .inner_content .form_account .produk_list .col_account label{
+    margin-top: 0px;
+}
+ .content_std .wrapper .inner_content .form_account  .radio-inline div:first-child{
+    width: 110px;
+    margin-left: 0px;
+}
+.content_std .wrapper .inner_content .form_account  .radio-inline div{
+    width: 150px;
+    float: left;
+    margin-left: 5px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .col_account_full .radio-inline label{
+    margin-left: 0px;
+ }
+.content_std .wrapper .inner_account .box_vm{
+    padding: 20px 20px !important;
+}
+.content_std .wrapper .inner_account .box_vm p{
+    font-size: 16px;
+}
+.content_std .wrapper .inner_account .btn_std_dis{
+    padding: 0 110px !important;
+}
+.content_std .wrapper .inner_account{
+        width: 296px;
+}
+.content_std .wrapper .inner_content .form_account .row_account .row_account2 .tgl_lahir input{
+    width: 50px !important;
+}
+.content_std .wrapper .inner_content .form_account .row_account .row_account2 .tgl_lahir input:last-child{
+    width: 90px !important;
+}
+.content_std .wrapper .inner_content .form_account .keluarga_terdekat .row_account3 .col_account3 input{
+    width:256px !important;
+}
+.content_std .wrapper .inner_content .form_account .program .col_account select{
+     width:278px !important;
+}
+.content_std .wrapper .inner_content .form_account .checkbox-inline div{
+    margin-left: 0px;
+    float: none;
+}
+.boxTableAccount{
+    width: 278px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding-bottom: 40px;
+    position: relative;
+    margin-bottom: 40px;
+}
+.content_std .wrapper .my_account .resp-accordion{
+    background-color: #eeeeee !important;
+    font-family: "open_sansregular" !important;
+    color:#333333 !important;
+}
+.content_std .wrapper .my_account .resp-tab-active{
+     color:#79531d !important;
+    font-family: "open_sansbold" !important;
+}
+.content_std .wrapper .my_account .form_account .row_account .col_account label{
+    display: block !important;
+}
+.content_std .wrapper .my_account .form_account .row_account .col_account select{
+    margin-left: 0px !important;
+    width: 140px !important;
+}
+.content_std .wrapper .my_account .form_account .row_account .col_account .btn_std{
+    padding: 0 25px !important;
+}
+.title_log{
+    margin-bottom: 20px;
+}
+.title_log h2,.title_log span{
+    float: none;
+}
+.content_std .wrapper .my_account .tree{
+    padding-left: 20px;
+}
+.resp-tab-content {
+    border: 1px solid #ddd;
+    border-top-color: #ddd;
+}
+.content_std .wrapper .inner_content .box_result{
+    width:245px;
+    margin:0 auto;
+    margin-top:60px;
+    padding: 28px 17px;
+}
+.content_std .wrapper .inner_content .box_result .tb_biodata tr th{
+    font-size: 12px;
+    line-height: 21px;
+    width: 50%;
+}
+.content_std .wrapper .inner_content .box_result .tb_biodata tr td{
+    font-size: 14px;
+    line-height: 21px;
+}
+.content_std .wrapper .inner_content .boxWizardStat div{
+    float: left;
+    width: 56px;
+    margin-left: 0px;
+}
+.boxWizardStat .btn_wizard_active:first-child{
+    background: url(../images/material/xs_img_first_wizard_active.png) no-repeat center center;
+    height: 17px;
+    line-height: 17px;
+    font-size: 8px;
+}
+.boxWizardStat .btn_wizard_inactive:first-child{
+    background: url(../images/material/xs_img_first_wizard_inactive.png) no-repeat center center;
+    height: 17px;
+    line-height: 17px;
+    font-size: 8px;
+}
+.boxWizardStat .btn_wizard_active{
+    background: url(../images/material/xs_img_wizard_active.png) no-repeat center center;
+    height: 17px;
+    line-height: 17px;
+    font-size: 8px;
+}
+.boxWizardStat .btn_wizard_inactive{
+    background: url(../images/material/xs_img_wizard_inactive.png) no-repeat center center;
+    height: 17px;
+    line-height: 17px;
+    font-size: 8px;
+}
+.content_std .wrapper .inner_content .contact_form .contact_us .col_input select
+{
+    width: 265px !important;
+}
+.content_std .wrapper .inner_content .contact_form .contact_us .col_input .btn_std
+{
+    padding: 0 63px !important;
+}
+.content_std .wrapper .become_our_team ol{
+    margin: 0px 0px 40px 4px;
+}
+.content_std .wrapper .inner_content .form_account .become_our_team_contact{
+    margin-left: 0px !important;
+}
+.content_std .wrapper .inner_shopping_cart{
+    width: 320px !important;
+    margin-left: 15px;
+}
+.content_std .wrapper .inner_shopping_cart table{
+    width: 300px;
+}
+.content_std .wrapper .inner_shopping_cart table th{
+    font-size: 12px;
+}
+.content_std .wrapper .inner_shopping_cart table td.img_prod img{
+    margin-top: -4px;
+}
+.content_std .wrapper .inner_shopping_cart table td.img_prod,
+.content_std .wrapper .inner_shopping_cart table tr th.header_item
+{
+    width: 60px;
+    padding-left: 0px;
+}
+.content_std .wrapper .inner_shopping_cart table tr td.text_desc,
+.content_std .wrapper .inner_shopping_cart table tr th.header_desc
+{
+    width: 125px;
+    padding-left: 8px;
+}
+.content_std .wrapper .inner_shopping_cart table tr th.header_harga_satuan{
+   color: #fff;
+}
+
+.content_std .wrapper .inner_shopping_cart table td b.desc{
+    font-size: 14px;
+}
+.content_std .wrapper .inner_shopping_cart table td .qty input{
+    width: 20px;
+    float: left;
+}
+.content_std .wrapper .inner_shopping_cart table td .qty span.remove{
+    margin-top: -8px;
+    margin-left: -4px;
+}
+.content_std .wrapper .inner_shopping_cart table td.text_qty,
+.content_std .wrapper .inner_shopping_cart table th.header_qty
+{
+    padding-left: 0px;
+    text-align: center;
+}
+.subtotal .label{
+    float: left;
+}
+.content_std .wrapper .inner_shopping_cart table td span.harga_satuan{
+    position: relative;
+    margin-left: 0px;
+    display: block;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+.content_std .wrapper .inner_shopping_cart .action_shopping,
+.content_std .wrapper .inner_shopping_cart .subtotal{
+    width: 286px;
+}
+.content_std .wrapper .inner_shopping_cart .subtotal .harga{
+    padding-right: 0px;
+}
+.content_std .wrapper .inner_shopping_cart .btn_std_dis{
+    padding: 0 20px;
+}
+.content_std .wrapper .inner_shopping_cart h2{
+    margin: 20px 0px 20px 0px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .detail_order{
+    display: none;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .btn_std_dis{
+    padding: 0 104px !important;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .radio-login{
+    vertical-align: middle;
+    line-height: 30px;
+}
+.content_std .wrapper .inner_shopping_cart .radio-login label span{
+    font-size: 14px;
+    font-family: "open_sansregular";
+    float: left;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .form_account .reset_pass .reset_link{
+    float: left;
+    display: block;
+    position: relative;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01{
+    margin-top: 20px;
+}
+.content_std .wrapper .inner_shopping_cart h2.title span{
+    position: absolute;
+    margin-top: 60px;
+}
+.content_std .wrapper .inner_shopping_cart .boxWizard ul{
+    float: none;
+    margin: 0 auto;
+}
+.content_std .wrapper .inner_shopping_cart .contact_form .contact_us .col_input select{
+    width: 309px !important;
+}
+.content_std .wrapper .inner_shopping_cart .thanks{
+    width: 240px !important;
+    margin:140px 0 0 0 !important;
+}
+.content_std .wrapper .inner_shopping_cart .thanks p{
+    margin: 0 0 20px 0;
+}
+.content_std .wrapper .inner_shopping_cart .thanks .btn_std_dis{
+    padding:0 30px !important;
+}
+
+/* footer
+----------------------------------------------------------------------------------------------*/
+footer .top{text-align: center;}
+footer .top a{width: 30px;display: inline-block;float: none}
+footer .top a span{display: none}

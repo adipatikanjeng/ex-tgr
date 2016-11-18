@@ -1,0 +1,1 @@
+{!! Form::select('pricelist_code', $priceList, ($pricelistCode) ?: Input::old('pricelist_code'), ['id' => 'pricelistProductContract', 'data-url' => url(App::getLocale().'/my-account/ajax-installment-list')]) !!}

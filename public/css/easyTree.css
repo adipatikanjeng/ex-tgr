@@ -1,0 +1,69 @@
+.tree {
+    min-height:20px;
+    margin-bottom:20px;
+}
+.tree ul li span.boxImage {
+    width: 60px;
+    float: left;
+}
+.tree ul li span.text_tree{
+    margin-top: 10px;
+    padding-left: 10px;
+}
+.tree ul li span.type_2,
+.tree ul li span.type_2:hover
+{    
+    background-position: left 8px;
+}
+
+.tree li.parent_li ul{
+    margin-left: 42px !important;
+}
+.tree li.parent_li ul li ul{    
+    margin-left:60px !important;
+}
+
+.tree li.parent_li ul li span.boxImage{
+    margin-left: 19px !important;
+}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 20px 5px;
+    position:relative
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:1px solid #dddddd;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:1px solid #dddddd;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    display:inline-block;
+    padding:0px;
+    text-decoration:none
+}
+.tree li.parent_li>span {
+    cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:30px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+}

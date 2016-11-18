@@ -1,0 +1,13 @@
+/* Additional style by WEBARQ\Admin */
+
+.hidden2 {
+    display: none;
+}
+
+.table>tbody>tr>td.section-l2 {
+    padding-left: 44px;
+}
+
+.table>tbody>tr>td.section-l3 {
+    padding-left: 64px;
+}

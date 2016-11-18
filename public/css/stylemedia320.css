@@ -1,0 +1,135 @@
+/*=============================================================================================	
+    Company    : PT Web Architect Technology - webarq.com
+    Document   : MediaQuery 320
+    Author     : Rizki Nida Chaerulsyah - akuiki.net
+==============================================================================================*/
+
+
+/* structure
+----------------------------------------------------------------------------------------------*/
+.wrapper{max-width: 320px}
+.btn_std {padding: 0 40px;}
+/* header
+----------------------------------------------------------------------------------------------*/
+
+/* middle
+----------------------------------------------------------------------------------------------*/
+
+
+section.banner p {top: 7px;line-height: 16px;font-size: 12px;}
+
+.content.home .wrapper p{max-width: 280px}
+.content.home .wrapper h2 {font-size: 30px;}
+
+
+.content.home .management .left,
+.content.home .management .left video,
+.content.home .management .left iframe{width: 270px; height: 177.4px;}
+.content.home .management .right {width: 280px;}
+
+.content.home .bx-wrapper .bx-controls-direction a {transform: scale(0.35);}
+.content.home .bx-wrapper .bx-controls-direction a.bx-next {right: -20px;}
+.content.home .bx-wrapper .bx-controls-direction a.bx-prev {left: -20px;}
+
+.content.home .popularseries .slide {height: 370px;}
+.content.home .popularseries .bx-wrapper .bx-controls-direction a {top: 34%;}
+
+.content.home .testimonial h2{text-align: center;color:#095828;margin-bottom: 24px;}
+.content.home .testimonial .wrapper .text-testimonial{display:inherit;font-size: 18px;color: #FFF;line-height: 24px;margin:24px 1px;margin: 0px auto 35px;}
+
+
+.content.home .events .box {
+    height: 640px;
+    width: 240px;
+}
+.content.home .events .left ,
+.content.home .events .left img{
+    width: 240px;
+    margin: 0
+}
+
+.content.home .events .box:after{
+    background: url(../images/material/bott_slider_shadow_320.png);
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 240px;
+    height: 12px;
+    top:100%;
+    left: 0;
+}
+
+.content.home .events .right{margin: 10px;width: 220px}
+.content.home .csr .left {width: 270px;}
+.content.home .csr .slide img{width: 230px;max-width: none}
+
+.content_std .wrapper .inner_content{width: 280px;}
+.content_std .inner_content .prod_detail .box .left{width: 280px;}
+.content_std .inner_content .prod_detail .box .img_prod_pc{display: none;}
+.content_std .inner_content .prod_detail .box .img_prod_mobile{display: inherit;    margin-top: 40px;}
+.content_std .inner_content .prod_detail .box .right .image {
+    text-align: right;
+    margin-top: 40px;
+}
+.content_std .inner_content .prod_detail .box .right {
+    width: 287px;
+}
+.content_std .inner_content .prod_detail .box:nth-of-type(3) .right {
+    margin-top: 30px;
+}
+.content_std .bg_prod_detail{height: 2564px;}
+.content_std .bg_prod_detail_contact{top:2669px;}
+.content_std .wrapper .inner_content .contact_form .row_input .col_input input, .content_std .wrapper .inner_content .contact_form .row_input .col_input textarea, .content_std .wrapper .inner_content .contact_form .row_input .col_input select{
+    width:243px;
+}
+.content_std .wrapper .inner_content .contact_form h2{font-size: 16px;}
+
+.content_std .wrapper .inner_content .account_form .row_input .col_input input, .content_std .wrapper .inner_content .account_form .row_input .col_input textarea, .content_std .wrapper .inner_content .account_form .row_input .col_input select{
+    width:243px;
+}
+.content_std .wrapper .inner_content .account_form h2{
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}
+
+.content_std .wrapper .inner_content .prod_detail h2.harga{font-size: 30px;}
+.content_std .wrapper .inner_content .prod_detail h4{font-size: 23px;}
+.content_std .wrapper .inner_content .prod_detail h2.harga .br-harga{display: inherit}
+.content_std .list_product .box h5{font-size: 16px;}
+.content_std .list_product .box .text{width: 290px;}
+.content_std .list_activities .box h5,
+.content_std .list_activities .box h5,
+.content_std .list_articles .box h5
+{font-size: 16px;}
+.content_std .list_activities .box .text,
+.content_std .list_activities .box .text
+{width: 290px;}
+.content_std .wrapper .inner_content li, .content_std .wrapper .inner_content p{font-size: 14px;}
+.content_std .list_activities .box,
+.content_std .list_activities .box,
+.content_std .list_articles .box
+{margin: 0 0 40px;}
+.content_std .list_activities .box .text h5 br,
+.content_std .list_activities .box .text h5 br,
+.content_std .list_articles .box .text h5 br
+{ display: none;}
+.content_std .wrapper .inner_account{
+    width: 296px;
+}
+.content.home .box_slide_popularseries
+{
+    width: 275px;
+}
+.content.home .popularseries .slide .left{
+    top: 150px;
+}
+.content_std .wrapper .inner_shopping_cart .contact_form .contact_us .col_input select{
+    width: 275px !important;
+}
+.content.home .popularseries .slide .right img {max-width: 100% !important;max-height: 140px;}
+.content.home .csr .wrapper {padding-bottom: 250px;}
+.content.home .csr .slide img{max-height:none !important;}
+/* footer
+----------------------------------------------------------------------------------------------*/
+
+footer .top a {width: 30px;padding: 0;margin: 16px 18px;}

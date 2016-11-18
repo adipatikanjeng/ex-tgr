@@ -1,0 +1,238 @@
+/*=============================================================================================
+    Company    : PT Web Architect Technology - webarq.com
+    Document   : MediaQuery 768
+    Author     : Rizki Nida Chaerulsyah - akuiki.net
+==============================================================================================*/
+
+/* structure
+----------------------------------------------------------------------------------------------*/
+.wrapper {width: 720px;}
+/* header
+----------------------------------------------------------------------------------------------*/
+header {height: 82px;}
+header .top .wrapper{display: none;}
+header .top {height: 15px;}
+header .top-mobile{
+    display: block;
+    position: absolute;
+    bottom: 100px;
+    right:0px;
+}
+header .top-mobile .lang{
+    right: -47px;
+    width: 110px;
+    position: relative;
+}
+header .top-mobile a{
+   display: inline;
+   width: 20px;
+   min-width: 20px;
+   right:-10px;
+   padding: 0px;
+   border-bottom: none;
+   height: 20px;
+   font-size: 14px;
+   color:#095828;
+   font-family: "open_sanssemibold";
+   text-transform: capitalize;
+}
+header .top-mobile span{
+    line-height: 25px;
+    margin-left: 0px;
+}
+header .top-mobile .cart a{
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 50px 0 0;
+    right:75px;
+    font-size: 14px;
+    background: url(../images/material/ico_cart_24.png) no-repeat right center;
+}
+
+header .logo {margin: 10px}
+
+body{overflow-x:hidden; }
+/*right:-315px*/
+header nav{display:none;z-index: 999;position: absolute;width:314px;height:673px;background-color: #ffffff;right:-315px;top:87px;line-height: 10px;}
+header nav a{display:block;width:100%;position: relative;margin-top:10px;text-align: right;padding-top: 20px;border-bottom:1px solid #cecece;height: 38px;}
+header nav a span{position: relative;float:right;top: -22px;margin-left: 10px;margin-right:10px;}
+
+
+header .mtoggle{
+    position: absolute;
+    display: block;
+    width: 65px;
+    height: 68px;
+    border-left: 1px solid #dddddd;
+    right: 0;
+    bottom: 0;
+}
+
+header .mtoggle a{
+    background: url(../images/material/ico_burger.png) no-repeat center;
+    display: block;
+    text-indent: -999px;
+    width: 66px;
+    height: 68px;
+    margin: 0 0 0 0;
+}
+
+/* middle
+----------------------------------------------------------------------------------------------*/
+section.banner p {top: 35px;line-height: 23px;font-size: 18px;}
+section.banner .title{display: none;}
+
+.content.home .management .left{width: 330px;height: 216.8px;}
+.content.home .management .left video,
+.content.home .management .left iframe {width: 330px;height: 222px;}
+.content.home .management .left .ico{width: 40px;}
+.content.home .management .right{width: 340px;}
+.content.home .management .right p {margin-bottom: 35px;}
+
+.content.home .popularseries{text-align: center;}
+.content.home .popularseries .slide{height: 490px;position: re}
+.content.home .popularseries .slide .left{
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+}
+.content.home .popularseries .slide .left{}
+.content.home .popularseries .left .btn_std {margin: 25px 0 0 0;}
+.content.home .popularseries h2 {margin-bottom: 45px;}
+
+.content.home .bx-wrapper .bx-controls-direction a{transform: scale(0.5)}
+.content.home .bx-wrapper .bx-controls-direction a.bx-next {right: -22px;}
+.content.home .bx-wrapper .bx-controls-direction a.bx-prev {left: -22px;}
+
+.content.home .testimonial .box:nth-of-type(3){margin-right: 0}
+.content.home .testimonial .box:nth-of-type(4){display: none;}
+.content.home .testimonial .wrapper{width: 725px}
+.content.home .testimonial h2{text-align: center;color:#095828;margin-bottom: 24px;}
+.content.home .testimonial .wrapper .text-testimonial{display:inherit;font-size: 21px;color: #FFF;line-height: 30px;margin:24px 36px;}
+
+.content.home .events .bx-wrapper{margin: auto}
+.content.home .events .bx-wrapper .bx-controls-direction a.bx-next {right: -42px;}
+.content.home .events .bx-wrapper .bx-controls-direction a.bx-prev {left: -42px;}
+.content.home .events .left {width: 280px;}
+.content.home .events .box,
+.content.home .events .left img{height: 390px;}
+.content.home .events .right {width: 255px;}
+.content.home .events .box:after{
+    background: url(../images/material/bott_slider_shadow_768.png);
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 580px;
+    height: 29px;
+    top:100%;
+    left: 0;
+}
+
+.content.home .csr{height:460px}
+.content.home .csr .wrapper{padding: 60px 0}
+.content.home .csr .left p {margin: 0px 0 25px;}
+.content.home .csr img.bg {bottom: 0;height: 335px;top:auto}
+.content.home .csr .bx-wrapper .bx-controls-direction a{transform: scale(1)}
+
+.content_std .wrapper .side,.content_std .bg_side{
+    display: block;
+    float: none;
+    margin: 30px 0 -45px;
+    position: relative;
+}
+.content_std .border_breadcrumb{display: none}
+.content_std .wrapper .side .box{display: none;}
+.content_std .wrapper .side,.content_std .bg_prod_detail,
+.content_std .wrapper .side,.content_std .bg_prod_detail_contact{
+    left:0px;
+    width: 100% !important;
+}
+.content_std .wrapper .inner_content{float: none;padding-bottom: 10px;margin: 0 auto;}
+.content_std .wrapper .inner_content .breadcrumb{margin-bottom: 30px;}
+
+.content_std .wrapper .inner_content .share{margin-top: 30px;padding: 20px 0 0px 0;}
+.content_std .bg_prod_detail_contact{top:2077px;}
+
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .detail_order,
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .order_2
+{
+    width: 360px !important;
+    margin-right: 252px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .detail_order table th.total,
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .order_2 .total
+{
+    width: 37%;
+}
+.content_std .wrapper .inner_content .boxWizard
+{
+    margin-right: 240px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .form_account .reset_pass .reset_link{
+    float: left;
+    display: block;
+    position: relative;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .form_account {
+    width: 343px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order div{
+    width: 256px;
+}
+/*
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order div table{
+    width: 200px;
+}*/
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boximg_prod_detail{
+    width: 245px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boxharga_prod_detail{
+    width: ;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boxharga_prod_detail div.sub_shipping{
+    margin-left: 40px;
+}
+
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boxharga_prod_detail div.harga_shipping{
+        margin-top: -24px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boximg_prod_detail .desc{
+    margin-left: 6px;
+    float: none;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order td div.boximg_prod_detail .harga{
+    margin-top: -123px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .prod_detail_order{
+    width: 329px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .action_btn a{
+    margin-left: 0px;
+}
+.content_std .wrapper .inner_shopping_cart .box_shop_01 .detail_order_3 input{
+    width: 338px;
+}
+.content_std .wrapper .shop_cart_01 {
+    width: 670px !important;
+}
+.content_std .wrapper .shop_cart_01 table td b.desc{
+    width: 158px !important;
+    display: block;
+    float: none;
+    margin-bottom: 5px;
+}
+.content_std .wrapper .shop_cart_01 table td span.harga_satuan{
+    margin-left: 0px;
+
+}
+/* footer
+----------------------------------------------------------------------------------------------*/
+footer .top a{width: 136px;}
+footer .top a h5 {font-size: 12px;}
+footer nav{display: none}
+footer .right{display: none;}
+footer .left{display: block;float: none;width: 100%;margin:15px 0 0 0;text-align: center;}
+footer p.foot{width: 100%;}

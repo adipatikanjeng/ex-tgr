@@ -1,0 +1,264 @@
+@extends('account')
+@section('content_account')
+<div class="breadcrumb breadcrumb_account">
+    <a href="{{ url(App::getLocale()) }}">Home</a><span> / </span>
+    <a href="{{ url(App::getLocale().'/my-account') }}">My Account</a><span> / </span>
+    <a href="{{ url(App::getLocale().'/my-account') }}">My Info</a><span> / </span>
+    <a href="">Kontrak Pembelian</a>
+</div>
+<h2>
+    Kontrak Pembelian
+    <div class="boxWizard after_clear">
+        <ul class="after_clear">
+            <li>1</li>
+            <li>2</li>
+            <li class="active">3</li>
+            <li>4</li>
+        </ul>
+    </div>
+</h2>
+
+<div class="contact_form form_account after_clear" style="margin:60px 0 0 0">
+    <h2>biodata keluarga:</h2>
+    <form action="{{ url(App::getLocale().'/my-account/contracts/page-three') }}" method="POST">
+        {!! csrf_field() !!}
+        <input type="hidden" name="id" value="{{ @$contract->id }}">
+        <div class="row_account after_clear">
+            <div class="col_account">
+                <label>Nama suami/ istri</label>
+                <input type="text" name="couple_name" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('couple_name')) ?: @$contract->couple_name }}" />
+            </div>
+            <div class="col_account">
+            </div>
+        </div>
+        <div class="row_account after_clear">
+            <div class="col_account">
+                <label>Bekerja pada</label>
+                <input type="text" name="couple_office" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('couple_office')) ?: @$contract->couple_office }}"/>
+            </div>
+            <div class="col_account">
+                <label>Jabatan/ Bagian</label>
+                <input type="text" name="couple_position" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('couple_position')) ?: @$contract->couple_position }}"/>
+            </div>
+        </div>
+        <div class="row_account after_clear">
+            <div class="col_account">
+                <label>Alamat Kantor</label>
+                <textarea name="couple_office_address" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }}>{{ (Input::old('couple_office_address')) ?: @$contract->couple_office_address }}</textarea>
+            </div>
+            <div class="row_account2">
+                <div class="col_account2">
+                    <label>Telepon</label>
+                    <input type="text" name="couple_telephone" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('couple_telephone')) ?: @$contract->couple_telephone }}" />
+                </div>
+            </div>
+        </div>
+        <div class='group' group_id='group_1'>
+            <div class="clone_content">
+                @if(count($children))
+                @foreach($children as $row)
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>nama anak</label>
+                        <input type="text" name="child_name[]" value="{{ (Input::old('child_name')) ?: @$row->name }}" />
+                    </div>
+                    <div class="row_account2">
+                        <div class="col_account2 tgl_lahir">
+                            <label>tanggal lahir anak</label>
+                            <div style="clear:right"></div>
+                            <input type="text" name="child_date_of_birth[]" class="datepicker" value="{{ (Input::old('child_date_of_birth')) ?: @$row->date_of_birth }}" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>sekolah</label>
+                        <input type="text" name="child_school[]" value="{{ (Input::old('child_school')) ?: @$row->school }}"/>
+                    </div>
+                    <div class="col_account">
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>nama anak</label>
+                        <input type="text" name="child_name[]" value="{{ Input::old('child_name') }}" />
+                    </div>
+                    <div class="row_account2">
+                        <div class="col_account2 tgl_lahir">
+                            <label>tanggal lahir anak</label>
+                            <div style="clear:right"></div>
+                            <input type="text" name="child_date_of_birth[]" class="datepicker" value="{{ Input::old('child_date_of_birth') }}" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>sekolah</label>
+                        <input type="text" name="child_school[]" value="{{ Input::old('child_school') }}"/>
+                    </div>
+                    <div class="col_account">
+                    </div>
+                </div>
+
+                @endif
+            </div>
+            <div class="clone_place">
+
+            </div>
+        </div>
+        <div class="row_account after_clear">
+            <div class="col_account">
+                <a class="readmore type_2 btn_add" target-clone='group_1' style="margin-top:45px;">Tambah anak</a>
+            </div>
+            <div class="col_account">
+
+            </div>
+        </div>
+
+        <h2 style="margin-top:80px;">keluarga terdekat yang bukan serumah:</h2>
+        <div class="row_account keluarga_terdekat after_clear">
+            <div class="col_account">
+                <div class="row_account3">
+                    <div class="col_account3">
+                        <label>nama</label>
+                        <input type="text" name="relatives_name" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('relatives_name')) ?: @$contract->relatives_name }}" />
+                    </div>
+                    <div class="col_account3" style="margin-top:15px;">
+                        <label>Telepon/ hp</label>
+                        <input type="text" name="relatives_telephone" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="{{ (Input::old('relatives_telephone')) ?: @$contract->relatives_telephone }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="col_account">
+                <label>Alamat Kantor</label>
+                <textarea name="relatives_office_address" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }}>{{ (Input::old('relatives_office_address')) ?: @$contract->relatives_office_address }}</textarea>
+            </div>
+        </div>
+
+        <h2 style="margin-top:80px;">status tempat tinggal anda sekarang:</h2>
+        <div class="row_account after_clear" style="padding-bottom:20px;">
+            <div class="col_account_full">
+                <div class="radio-inline rd_2">
+                    <div>
+                        <label>
+                            <input type="radio" value="Milik Sendiri" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} name="home_status" {{ (@$contract->home_status) ? ((@$contract->home_status == 'Milik Sendiri') ? 'checked="checked"' : '') : 'checked="checked"' }}/> Milik sendiri
+                        </label>
+                        <label>
+                            <input type="radio" value="Kontrak" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} name="home_status" {{ (@$contract->home_status) ? ((@$contract->home_status == 'Kontrak') ? 'checked="checked"' : '') : '' }}/> Kontrak
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" value="Rumah Dinas" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} name="home_status" {{ (@$contract->home_status) ? ((@$contract->home_status == 'Rumah Dinas') ? 'checked="checked"' : '') : '' }}/> Rumah dinas
+                        </label>
+                        <label>
+                            <input type="radio" name="home_status" {{ (@$contract->payment_type == 'Cash') ? '' : 'required' }} value="Lain-lain" {{ (@$contract->home_status) ? ((@$contract->home_status == 'Lain-lain') ? 'checked="checked"' : '') : '' }} /> Lain-lain
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-top:80px;">program yang pernah anda miliki:</h2>
+        <div class='group' group_id='group_2'>
+            <div class="clone_content">
+                @if(count($productSeries))
+                @foreach($productSeries as $row)
+                <div class="row_account program after_clear">
+                    <div class="col_account">
+                        <label>seri</label>
+                        {!! Form::select('product_id[]', ['' => 'Pilih Program'] + $products->toArray(), (Input::old('product_id')) ?: $row->product_id) !!}
+                    </div>
+                    <div class="col_account">
+                        <label>Tahun pembelian</label>
+                        {!! Form::select('year[]',  ['' => 'Pilih Tahun'] + App\Site::yearLists(), (Input::old('year')) ?: $row->year) !!}
+                    </div>
+                </div>
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>nama epc</label>
+                        <input type="text" name="epc_name[]" value="{{ (Input::old('epc_name')) ?: $row->epc_name }}" />
+                    </div>
+                    <div class="col_account">
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <div class="row_account program after_clear">
+                    <div class="col_account">
+                        <label>seri</label>
+                        {!! Form::select('product_id[]', ['' => 'Pilih Program'] + $products->toArray(), Input::old('product_id')) !!}
+                    </div>
+                    <div class="col_account">
+                        <label>Tahun pembelian</label>
+                        {!! Form::select('year[]', ['' => 'Pilih Tahun'] + App\Site::yearLists(), Input::old('year')) !!}
+                    </div>
+                </div>
+                <div class="row_account after_clear">
+                    <div class="col_account">
+                        <label>nama epc</label>
+                        <input type="text" name="epc_name[]" value="{{ Input::old('epc_name') }}" />
+                    </div>
+                    <div class="col_account">
+                    </div>
+                </div>
+                @endif
+            </div>
+            <div class="clone_place">
+
+            </div>
+        </div>
+        <div class="row_account after_clear">
+            <div class="col_account">
+            <a class="readmore type_2 btn_add" target-clone='group_2' style="margin-top:45px;">Tambah seri</a>
+           </div>
+           <div class="col_account">
+
+           </div>
+       </div>
+
+       <h2 style="margin-top:80px;">jenis kartu kredit anda:</h2>
+       <div class="row_account after_clear">
+        <div class="col_account">
+            <label>no. kartu</label>
+            <input type="text" name="cc_number" value="{{ (Input::old('cc_number')) ?: @$contract->cc_number }}"/>
+        </div>
+        <div class="col_account">
+            <label>bank</label>
+            <input type="text" name="cc_bank" value="{{ (Input::old('cc_bank')) ?: @$contract->cc_bank }}"/>
+        </div>
+    </div>
+    <div class="row_account after_clear">
+        <div class="col_account">
+            <label>berlaku s/d</label>
+            <input type="text" name="cc_valid_date" class="datepicker" value="{{ (Input::old('cc_valid_date')) ?: ($contract->cc_valid_date != '0000-00-00') ? @Carbon::parse($contract->cc_valid_date)->format('d F Y') : '' }}"/>
+        </div>
+        <div class="col_account">
+        </div>
+    </div>
+
+    <h2 style="margin-top:80px;">Sumber referensi pelanggan (diisi oleh EPC) :</h2>
+    <div class="row_account after_clear" style="padding-bottom:20px;">
+        <div class="col_account_full">
+            <div class="checkbox-inline">
+                  <div class="row_account program after_clear">
+                    <div class="col_account">
+                        {!! Form::select('source_id', $sources, $contract->source_id ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:20px;">
+        <button type="submit" class="btn_std_dis" style="padding:0 115px">Continue</button>
+    </div>
+
+</form>
+
+</div>
+@endsection
